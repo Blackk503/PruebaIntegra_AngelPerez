@@ -1,0 +1,78 @@
+﻿@model AngelPerezIntegra.DTO.DTOCoin.Bitcoin
+@{
+    ViewData["Title"] = "Coin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Coin</h1>
+<hr />
+<div>
+    
+</div>
+<div id="myDiv">
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        let cont = localStorage.getItem("cont") === null ? 0 : localStorage.getItem("cont");
+        /*Contar hasta 120 para medir una hora refrescando 30 segundos*/
+        if (cont > 119) {
+            localStorage.clear();
+        }
+        else {
+            cont++;
+            localStorage.setItem("cont", cont);
+        }
+        let arrayData = localStorage.getItem("x") === null ? [] : localStorage.getItem("x").split(",");
+        arrayData.push(`@Model.Time.UpdatedIso.UtcDateTime.ToString("hh:mm:ss")`);
+        localStorage.setItem("x", arrayData);
+        arrayData = [];
+
+        arrayData = localStorage.getItem("usd") === null ? [] : localStorage.getItem("usd").split(",");
+        arrayData.push((`@Model.Bpi.Usd.Rate`).replace(',', ''));
+        localStorage.setItem("usd", arrayData);
+        arrayData = [];
+
+        arrayData = localStorage.getItem("gbp") === null ? [] : localStorage.getItem("gbp").split(",");
+        arrayData.push((`@Model.Bpi.Gbp.Rate`).replace(',', ''));
+        localStorage.setItem("gbp", arrayData);
+
+        arrayData = [];
+
+        arrayData = localStorage.getItem("eur") === null ? [] : localStorage.getItem("eur").split(",");
+        arrayData.push((`@Model.Bpi.Eur.Rate`).replace(',', ''));
+        localStorage.setItem("eur", arrayData);
+
+
+        window.setTimeout(function () {
+            window.location.reload();
+        }, 30000);
+        var trace1 = {
+            x: localStorage.getItem("x").split(","),
+            y: localStorage.getItem("usd").split(","),
+            name: `@Model.Bpi.Usd.Description`,
+            type: 'scatter'
+        };
+
+        var trace2 = {
+            x: localStorage.getItem("x").split(","),
+            y: localStorage.getItem("gbp").split(","),
+            name: `@Model.Bpi.Gbp.Description`,
+            type: 'scatter'
+        };
+        var trace3 = {
+            x: localStorage.getItem("x").split(","),
+            y: localStorage.getItem("eur").split(","),
+            name: `@Model.Bpi.Eur.Description`,
+            type: 'scatter'
+        };
+
+        var data = [trace1, trace2, trace3];
+        var layout = {
+            title: 'CoinDesk Bitcoin Price',
+            showlegend: true
+        };
+        Plotly.newPlot('myDiv', data, layout, { scrollZoom: true });
+    });
+</script>

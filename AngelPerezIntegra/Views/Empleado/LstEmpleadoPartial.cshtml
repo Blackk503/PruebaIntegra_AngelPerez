@@ -1,0 +1,56 @@
+﻿@model IEnumerable<AngelPerezIntegra.DTO.DTOEmpleado>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Telefono
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Foto
+            </th>
+            <th>
+                Fecha contratacion
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <img src="~/img/Empleado/@item.RutaFoto" style="width: 50px;" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaFormat)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdEmpleado">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.IdEmpleado">Imprimir PDF</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdEmpleado">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

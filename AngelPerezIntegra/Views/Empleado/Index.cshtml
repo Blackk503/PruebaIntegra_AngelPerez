@@ -1,0 +1,17 @@
+﻿@model IEnumerable<AngelPerezIntegra.DTO.DTOEmpleado>
+
+@{
+    ViewData["Title"] = "Empleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Empleado</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo</a>
+</p>
+<input id="BuscarEmpleado" type="text" placeholder="Email o Apellido" />
+<div id="TblEmpleados">
+    @await Html.PartialAsync("LstEmpleadoPartial.cshtml", Model)
+</div>
+<script src="~/js/site.js" asp-append-version="true"></script>

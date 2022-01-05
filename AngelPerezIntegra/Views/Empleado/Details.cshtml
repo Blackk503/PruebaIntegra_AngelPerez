@@ -1,0 +1,63 @@
+﻿@model AngelPerezIntegra.DTO.DTOEmpleado
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ficha de empleado</h1>
+    <hr />
+
+<div class="section-to-print border">
+    <dl class="row ml-1 mt-2">
+        <dt class="col-sm-4">
+            <img id="img-upload" src="~/img/Empleado/@Model.RutaFoto" />
+        </dt>
+        <dd class="col-sm-8">
+
+        </dd>
+        
+    </dl>
+    <dl class="row ml-1 mt-2">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Apellido):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Telefono):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email):
+        </dt>
+        <dd class="col-sm-10 no-hipervinculo">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FechaFormat):
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FechaFormat)
+        </dd>
+    </dl>
+</div>
+<div id="section-no-print">
+    <a asp-action="Edit" asp-route-id="@Model.IdEmpleado">Actualizar</a> |
+    <a asp-action="Index">Volver</a>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        window.print();
+    });
+</script>
